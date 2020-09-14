@@ -15,8 +15,7 @@ const Logic = props => {
 
 
 
-    const make2DArray = (column, row) => {
-
+    const make2DArray = (column, row, reset) => {
         let twoDimArray = new Array(isNaN(column)? 0 : column);
 
         for(let i = 0; i < twoDimArray.length; i++){
@@ -25,18 +24,18 @@ const Logic = props => {
         //fills Two Dimensional Array with 0's and 1's
         for(let i = 0; i < twoDimArray.length; i++){
             for( let j = 0; j < row; j++){
-                twoDimArray[i][j] = Math.floor(Math.random() * 2);
+                reset? twoDimArray[i][j] = 0  :twoDimArray[i][j] = Math.floor(Math.random() * 2) 
             }
         }
         return twoDimArray
     }
-    let initialValue = make2DArray(cols.cols, cols.cols)
+    let initialValue = make2DArray(cols.cols, cols.cols,false)
 
     const [currentCell, setCurrentCell] = useState(initialValue)
     const [states, setStates] = useState({[counter]:initialValue});
 
     useEffect(()=> {
-        setCurrentCell(make2DArray(cols.cols, cols.cols))
+        setCurrentCell(make2DArray(cols.cols, cols.cols, false))
     }, [cols])
 
 
@@ -95,10 +94,16 @@ const Logic = props => {
         setCols({
             cols : parseInt(isNaN(colrow)? 0: colrow)
         })
+        setCounter(0)
     }
 
     const resetState = e => {
-        setCurrentCell(make2DArray(cols.cols, cols.cols))
+        setCurrentCell(make2DArray(cols.cols, cols.cols, false))
+        setCounter(0)
+    }
+
+    const clearState = e => {
+        setCurrentCell(make2DArray(cols.cols, cols.cols, true))
         setCounter(0)
     }
 
@@ -115,6 +120,7 @@ const Logic = props => {
                 <button onClick={togglePrev}>Previous</button>
                 <button onClick={toggleNext}>Next</button>
                 <button onClick={resetState}>Reset</button>
+                <button onClick={clearState}>Clear</button>
 
             </div>
             <Visuals currentCell={currentCell} toggleState = {toggleState}/>
