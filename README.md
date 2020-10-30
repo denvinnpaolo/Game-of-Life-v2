@@ -1,4 +1,3 @@
-# Game-of-Life-v2
 # Cellular Automata and Conway's "Game of Life"
 
 ---
