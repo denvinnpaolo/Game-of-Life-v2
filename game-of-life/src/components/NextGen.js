@@ -10,6 +10,7 @@
             let state = curr[i][j];
             let neighbors = countNeighbors(curr, i, j, cols, rows)
 
+            
             // value of the neighbors to determine state of the current cell
             if(state === 0 && neighbors === 3){
                 next[i][j] = 1;
