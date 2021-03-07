@@ -1,14 +1,16 @@
 
     const NextGen = (curr, cols, rows, counter) => {
+    // holds the next state
     let next = []
+
+    // for loops to traverse current state neighbors for the next state
     for(let i = 0; i < cols; i++){
         next[i] = new Array(curr[i].length)
         for(let j = 0; j < rows; j++){
             let state = curr[i][j];
-            // console.log(`state: ${state}`)
-            //sum of neighbors
             let neighbors = countNeighbors(curr, i, j, cols, rows)
-    
+
+            // value of the neighbors to determine state of the current cell
             if(state === 0 && neighbors === 3){
                 next[i][j] = 1;
             } else if(state === 1 && (neighbors < 2 || neighbors > 3)){
